@@ -1,0 +1,27 @@
+docker --version
+docker run hello-word
+docker image ls
+1)en una carpeta crear proyecto web 
+dotnet new webapi -f net5.0
+2)probar 
+dotnet run
+3)publicar 
+dotnet publish -c release
+4)crear dockerfile dentro de la carpeta publish
+-- docker file
+# Tomar como base la imagen con el runtime ASP.NET Core 5
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
+# Establecer el directorio de trabajo
+WORKDIR /app
+# Copiar los archivos del directorio de publicación
+COPY . .
+# Exponer el puerto 80
+EXPOSE 80
+# Establecer el punto de entrada con el comando: dotnet mywebapp.dll
+ENTRYPOINT ["dotnet", "PROYECTO.dll"]
+-- docker file
+5)build
+docker build -t demo-webapi .
+
+6)run
+docker run -d -p 4000:80 demo-webapi
